@@ -231,6 +231,83 @@ assert(compareArrays(quickSort([3,2,1]),[1,2,3]));
 assert(compareArrays(quickSort([6,4,5,7,4,2,3,5,7,9,6,4,2,1,2,3,11,12,9,7,13,6]),
             [ 1, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, 9, 9, 11, 12, 13 ]));
 
+// mergeSort - this function sorts a given array based on the Merge
+// Sort algorithm.
+//
+// Pseudocode:
+// if the length of array is <= 1
+//  then return the array
+// create a list for the left and right side and get the middle value
+// which is half the length of the array
+// Partition the arr such that:
+//  Everything before the middle index goes in left
+//  Everything at or after the middle index goes in right
+// Call mergeSort on the left array
+// Call mergeSort on the right array
+// Call merge on the left and right
+// Return the resulting merged array
+function mergeSort(arr) {
+    if(arr.length <= 1) {
+        return arr;
+    }
+    var middle = arr.length/2,
+        left = arr.slice(0,middle),
+        right = arr.slice(middle,arr.length);
+    left = mergeSort(left);
+    right = mergeSort(right);
+    return merge(left,right);
+}
+
+// merge: Array<Integer>:left Array<Integer>:right -> Array<Integer>:result
+// this function merges two given arrays for the mergeSort
+// function and returns the resulting merged array.
+//
+// Pseudocode:
+// while the length of left > 0 OR length of right > 0
+//  if the length of left > 0 AND length of right > 0 then
+//      if left[0] <= right[0] then
+//          splice the value at left[0]
+//          append the spliced value to result
+//      else
+//          splice the value at right[0]
+//          append the spliced value to result
+//  else if length of left > 0 then
+//      splice the value at left[0]
+//      append the spliced value to result
+//  else if length of right > 0 then
+//      splice the value at right[0]
+//      append the spliced value to result
+// return result
+function merge(left,right) {
+    var result = [];
+    while(left.length > 0 || right.length > 0) {
+        if(left.length > 0 && right.length > 0) {
+            if(left[0] <= right[0]) {
+                result.push(left.splice(0,1)[0]);
+            }
+            else {
+                result.push(right.splice(0,1)[0]);
+            }
+        }
+        else if(left.length > 0) {
+            result.push(left.splice(0,1)[0]);
+        }
+        else if(right.length > 0) {
+            result.push(right.splice(0,1)[0]);
+        }
+    }
+    return result;
+}
+
+// testing out mergeSort()
+assert(compareArrays(mergeSort([]),[]));
+assert(compareArrays(mergeSort([11]),[11]));
+assert(compareArrays(mergeSort([9,8]),[8,9]));
+assert(compareArrays(mergeSort([1,2,3]),[1,2,3]));
+assert(compareArrays(mergeSort([3,2,1]),[1,2,3]));
+assert(compareArrays(mergeSort([6,4,5,7,4,2,3,5,7,9,6,4,2,1,2,3,11,12,9,7,13,6]),
+            [ 1, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, 9, 9, 11, 12, 13 ]));
+
 // testing sorting against itself
 assert(compareArrays(insertionSort([4,5,9,2,7,1,1,1,6]), selectionSort([4,5,9,2,7,1,1,1,6])));
 
