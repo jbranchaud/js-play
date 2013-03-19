@@ -62,6 +62,13 @@ function getMax(arr) {
     return max;
 }
 
+// testing out getMax()
+assert(getMax([1,2,3]) == 3, "using getMax");
+assert(getMax([5,2,4]) == 5, "using getMax");
+assert(getMax([-1,-2,-3]) == -1, "using getMax");
+assert(getMax([10]) == 10);
+assert(getMax([]) == undefined);
+
 // getMin - this function will take an array of integers and find
 // the min value in that array.
 //
@@ -82,6 +89,13 @@ function getMin(arr) {
 
     return min;
 }
+
+// testing out getMin()
+assert(getMin([1,2,3]) == 1);
+assert(getMin([5,2,4]) == 2);
+assert(getMin([-1,-2,-3]) == -3);
+assert(getMin([10]) == 10);
+assert(getMin([]) == undefined);
 
 // compareArrays - given two arrays of integers, this function will
 // first compare the length of the arrays. If the lengths differ, then
@@ -145,6 +159,12 @@ function selectionSort(arr) {
     return sortedArr;
 }
 
+// testing out selectionSort()
+assert(compareArrays(selectionSort([1,2,3]),[1,2,3]));
+assert(compareArrays(selectionSort([3,2,1]),[1,2,3]));
+assert(compareArrays(selectionSort([]),[]));
+assert(compareArrays(selectionSort([5]),[5]));
+
 // insertionSort - this function sorts a given array based on the
 // insertion sort algorithm.
 //
@@ -162,26 +182,6 @@ function insertionSort(arr) {
     }
     return arr;
 }
-
-// testing out getMax()
-assert(getMax([1,2,3]) == 3, "using getMax");
-assert(getMax([5,2,4]) == 5, "using getMax");
-assert(getMax([-1,-2,-3]) == -1, "using getMax");
-assert(getMax([10]) == 10);
-assert(getMax([]) == undefined);
-
-// testing out getMin()
-assert(getMin([1,2,3]) == 1);
-assert(getMin([5,2,4]) == 2);
-assert(getMin([-1,-2,-3]) == -3);
-assert(getMin([10]) == 10);
-assert(getMin([]) == undefined);
-
-// testing out selectionSort()
-assert(compareArrays(selectionSort([1,2,3]),[1,2,3]));
-assert(compareArrays(selectionSort([3,2,1]),[1,2,3]));
-assert(compareArrays(selectionSort([]),[]));
-assert(compareArrays(selectionSort([5]),[5]));
 
 // testing out insertionSort()
 assert(compareArrays(insertionSort([1,2,3]),[1,2,3]));
