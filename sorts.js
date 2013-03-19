@@ -83,6 +83,68 @@ function getMin(arr) {
     return min;
 }
 
+// compareArrays - given two arrays of integers, this function will
+// first compare the length of the arrays. If the lengths differ, then
+// false is immediately returned, otherwise the function will then
+// check the equality of each integer in the array. If the all match,
+// then true is returned. If even one does not match, then false is
+// returned.
+//
+// Examples:
+// compareArrays([1,2,3],[1,2,3])
+// > true
+// compareArrays([1,2,3],[1,2,4])
+// > false
+function compareArrays(arr1, arr2) {
+    if(arr1.length != arr2.length) {
+        return false;
+    }
+
+    for(var i = 0; i < arr1.length; i++) {
+        if(arr1[i] != arr2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// selectionSort - this function will take an array of integers and
+// sort it using the selection sort algorithm. The resulting sorted
+// list will be returned.
+//
+// Pseudocode:
+// create a sortedArray that is empty
+// while the length of the given array is greater than 0
+//  grab the first item in the array and assign to min
+//  the minIndex is assigned to 0
+//  for each subsequent item in the given array
+//      if min is greater than the curr item
+//          then min is assigned to be the curr item
+//          minIndex is assigned to the index of curr item
+//  splice/remove minIndex from the given array
+//  push/append the min value onto the sortedArray
+// return the sorted array
+//
+// Example:
+// selectionSort([3,2,1])
+// > [1,2,3]
+function selectionSort(arr) {
+    var sortedArr = [];
+    while(arr.length > 0) {
+        var min = arr[0],
+            minIndex = 0;
+        for(var i = 1; i < arr.length; i++) {
+            if(min > arr[i]) {
+                min = arr[i];
+                minIndex = i;
+            }
+        }
+        arr.splice(minIndex, 1);
+        sortedArr.push(min);
+    }
+    return sortedArr;
+}
+
 // testing out getMax()
 assert(getMax([1,2,3]) == 3, "using getMax");
 assert(getMax([5,2,4]) == 5, "using getMax");
@@ -97,3 +159,8 @@ assert(getMin([-1,-2,-3]) == -3);
 assert(getMin([10]) == 10);
 assert(getMin([]) == undefined);
 
+// testing out selectionSort()
+assert(compareArrays(selectionSort([1,2,3]),[1,2,3]));
+assert(compareArrays(selectionSort([3,2,1]),[1,2,3]));
+assert(compareArrays(selectionSort([]),[]));
+assert(compareArrays(selectionSort([5]),[5]));
