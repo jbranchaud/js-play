@@ -189,6 +189,48 @@ assert(compareArrays(insertionSort([3,2,1]),[1,2,3]));
 assert(compareArrays(insertionSort([]),[]));
 assert(compareArrays(insertionSort([5]),[5]));
 
+// quickSort - this function sorts a given array based on the Quick
+// Sort algorithm.
+//
+// Pseudocode:
+// if the length of array is <= 1
+//  then return the array
+// Splice the arr.length/2 item from the array, put in pivot
+// for each remaining item in arr
+//  if item is <= pivot then add to less
+//  if item is > pivot then add to more
+// concatenate quickSort(less), pivot, quickSort(more)
+// return the concatenated list
+function quickSort(arr) {
+    if(arr.length <= 1) {
+        return arr;
+    }
+
+    var pivot = arr.splice(arr.length/2, 1)[0],
+        less = [],
+        more = [];
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] <= pivot) {
+            less.push(arr[i]);
+        }
+        else {
+            // it is greater
+            more.push(arr[i]);
+        }
+    }
+    var sortedArr = quickSort(less).concat(pivot, quickSort(more));
+    return sortedArr;
+}
+
+// testing out quickSort()
+assert(compareArrays(quickSort([]),[]));
+assert(compareArrays(quickSort([11]),[11]));
+assert(compareArrays(quickSort([9,8]),[8,9]));
+assert(compareArrays(quickSort([1,2,3]),[1,2,3]));
+assert(compareArrays(quickSort([3,2,1]),[1,2,3]));
+assert(compareArrays(quickSort([6,4,5,7,4,2,3,5,7,9,6,4,2,1,2,3,11,12,9,7,13,6]),
+            [ 1, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, 9, 9, 11, 12, 13 ]));
+
 // testing sorting against itself
 assert(compareArrays(insertionSort([4,5,9,2,7,1,1,1,6]), selectionSort([4,5,9,2,7,1,1,1,6])));
 
