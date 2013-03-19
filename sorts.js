@@ -145,6 +145,24 @@ function selectionSort(arr) {
     return sortedArr;
 }
 
+// insertionSort - this function sorts a given array based on the
+// insertion sort algorithm.
+//
+// Pseudocode:
+//
+function insertionSort(arr) {
+    for(var i = 1; i < arr.length; i++) {
+        var val = arr[i],
+            holePos = i;
+        while(holePos > 0 && val < arr[holePos - 1]) {
+            arr[holePos] = arr[holePos - 1];
+            holePos = holePos - 1;
+        }
+        arr[holePos] = val;
+    }
+    return arr;
+}
+
 // testing out getMax()
 assert(getMax([1,2,3]) == 3, "using getMax");
 assert(getMax([5,2,4]) == 5, "using getMax");
@@ -164,3 +182,13 @@ assert(compareArrays(selectionSort([1,2,3]),[1,2,3]));
 assert(compareArrays(selectionSort([3,2,1]),[1,2,3]));
 assert(compareArrays(selectionSort([]),[]));
 assert(compareArrays(selectionSort([5]),[5]));
+
+// testing out insertionSort()
+assert(compareArrays(insertionSort([1,2,3]),[1,2,3]));
+assert(compareArrays(insertionSort([3,2,1]),[1,2,3]));
+assert(compareArrays(insertionSort([]),[]));
+assert(compareArrays(insertionSort([5]),[5]));
+
+// testing sorting against itself
+assert(compareArrays(insertionSort([4,5,9,2,7,1,1,1,6]), selectionSort([4,5,9,2,7,1,1,1,6])));
+
