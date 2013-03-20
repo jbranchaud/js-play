@@ -2,14 +2,6 @@
  * sorts.js - a variety of sorting algorithms and other functions
  */
 
-
-// assert - this function will wrap the above assert method and
-// remove the need to pass in a string, instead, the expression
-// that is given will be used as the message passed into assert.
-function assert(expression) {
-    assert(expression, '');
-}
-
 // assert - this function will add support for assertions. Two items
 // can be passed in and their equality will be tested. If they are
 // evaluated to be equal, then the function will silently return,
