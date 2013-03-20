@@ -5,26 +5,15 @@ function board() {
 }
 
 /*
- * createBoard: none -> Array<Array<Integer>>:board
- * this function takes no arguments and instead references the global
- * default BOARD_SIZE. It calls the createBoard function with this
- * BOARD_SIZE value and returns the board that it generates.
- */
-function createBoard() {
-    console.log('createBoard1 being called.');
-    console.log('BOARD_SIZE == ' + BOARD_SIZE);
-    return createBoard(BOARD_SIZE);
-}
-
-/*
  * createBoard: Integer:boardSize -> Array<Array<Integer>>:board
  * given the size of a board, this function creates a 2d array for
  * the board that is boardSize x boardSize with all the values
  * initialized to 0. The resulting 2D array is then returned.
  */
 function createBoard(boardSize) {
-    console.log('createBoard2 being called.');
-    console.log('BOARD_SIZE == ' + BOARD_SIZE);
+    if(boardSize == null) {
+        boardSize = BOARD_SIZE;
+    }
     var board = new Array(boardSize);
     for(var i = 0; i < boardSize; i++) {
         var currRow = new Array(boardSize);
@@ -36,5 +25,19 @@ function createBoard(boardSize) {
     return board;
 }
 
-createBoard();
-createBoard(100);
+/*
+ * printBoard: Array<Array<Integer>:board -> void
+ * given a 2D array of integers that represents a Game of Life game
+ * board, this function will pretty print the board to the console
+ * for everyone's viewing pleasure.
+ */
+function printBoard(board) {
+    function printRow(element, index, array) {
+        console.log(element.join(''));
+    }
+    board.forEach(printRow);
+}
+
+var b1 = createBoard();
+var b2 = createBoard(20);
+printBoard(b2);
