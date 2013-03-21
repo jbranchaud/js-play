@@ -90,14 +90,6 @@ function getLivenessBoard(board) {
     return lboard;
 }
 
-// TODO: Because of the way that isLive is implemented, the function
-// countLiveNeighbors doesn't need to so explicitely check the relative
-// location of every neighbor before calling isLive, it can simply call
-// isLive and that function will do the check.
-// TODO: Furthermore, isLive, instead of checking bounds, can simply grab
-// the value at the coordinate, if it is out of bounds, then undefined
-// will be the result, in which case 0 can be returned. If actual values
-// are returned, then they can be handled as is.
 /*
  * isLive: Array<Array<Integer>>:board, Integer:x, Integer:y -> Integer:val
  * given a board and the a coordinate on the board, this function will see
@@ -122,84 +114,9 @@ function isLive(board, x, y) {
  * given a board, this function will look at the locations surrounding
  * the cell located at the coordinate (x,y). For each live cell around
  * that cell, the count will be incremented. The final count will be
- * returned.
+ * returned. This function uses the isLive function to remove the need
+ * to do bounds checking on every possible neighbor.
  */
-/*
-function countLiveNeighbors(board, x, y) {
-    var count = 0;
-    // can I look up and down
-    if(x > 0 && x < length) {
-        // can I look left and right
-        var row = board[x];
-        if(y > 0 && y < row.length) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x+1, y);
-            count += isLive(board, x-1, y-1);
-            count += isLive(board, x+1, y-1);
-            count += isLive(board, x-1, y+1);
-            count += isLive(board, x+1, y+1);
-            count += isLive(board, x, y-1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == 0) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x+1, y);
-            count += isLive(board, x-1, y+1);
-            count += isLive(board, x+1, y+1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == row.length) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x+1, y);
-            count += isLive(board, x-1, y-1);
-            count += isLive(board, x+1, y-1);
-            count += isLive(board, x, y-1);
-        }
-    }
-    else if(x == 0) {
-        var row = board[x];
-        if(y > 0 && y < row.length) {
-            count += isLive(board, x+1, y);
-            count += isLive(board, x+1, y-1);
-            count += isLive(board, x+1, y+1);
-            count += isLive(board, x, y-1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == 0) {
-            count += isLive(board, x+1, y);
-            count += isLive(board, x+1, y+1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == row.length) {
-            count += isLive(board, x+1, y);
-            count += isLive(board, x+1, y-1);
-            count += isLive(board, x, y-1);
-        }
-    }
-    else if(x == board.length) {
-        var row = board[x];
-        if(y > 0 && y < row.length) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x-1, y-1);
-            count += isLive(board, x-1, y+1);
-            count += isLive(board, x, y-1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == 0) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x-1, y+1);
-            count += isLive(board, x, y+1);
-        }
-        else if(y == row.length) {
-            count += isLive(board, x-1, y);
-            count += isLive(board, x-1, y-1);
-            count += isLive(board, x, y-1);
-        }
-    }
-    return count;
-}
-*/
-
 function countLiveNeighbors(board,x,y) {
     var count = 0;
     count += isLive(board, x-1, y);
