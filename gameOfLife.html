@@ -61,7 +61,25 @@
                         else {
                             return "black";
                         }
+                });
+
+            function updateWorld(board,gEnters) {
+                board = updateBoard(board);
+                gEnters.selectAll("rect")
+                    .transition()
+                    .attr("fill", function(d,i) {
+                        if(board[d[0]][d[1]] <= 0) {
+                            return "lightgray";
+                        }
+                        else {
+                            return "black";
+                        }
                     });
+                setInterval(function() { updateWorld(board,gEnters); }, 1000);
+            }
+
+            updateWorld(board, gEnters);
+
         </script>
     </body>
 
