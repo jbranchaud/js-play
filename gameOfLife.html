@@ -6,13 +6,63 @@
         <title>Game of Life</title>
 
         <!-- scripts -->
+        <script type="text/javascript" src="./d3/d3.v3.js"></script>
         <script type="text/javascript" src="./gameOfLife.js"></script>
 
         <!-- styles -->
     </head>
 
     <body>
+    <script type="text/javascript">
+            var boardSize = 50;
+            var board = createBoard(boardSize);
+            var rectWidth = 10,
+                rectHeight = 10,
+                rectPadding = 2,
+                xOffset = 20,
+                yOffset = 20;
 
+            var svgWidth = (boardSize * (rectWidth + rectPadding)) -
+                    rectPadding + (xOffset * 2),
+                svgHeight = (boardSize * (rectHeight + rectPadding)) -
+                    rectPadding + (yOffset * 2),
+                svg = d3.select("body").append("svg")
+                        .attr("width", svgWidth)
+                        .attr("height", svgHeight);
+
+            var getData = function(board) {
+                var data = [];
+                for(var i = 0; i < board.length; i++) {
+                    for(var j = 0; j < board[i].length; j++) {
+                        data.push([i,j,board[i][j]]);
+                    }
+                }
+                return data;
+            };
+
+            var gEnters = svg.selectAll("g")
+                .data(getData(board))
+                .enter()
+                .append("g");
+
+            gEnters.append("rect")
+                .attr("x", function(d,i) {
+                        return (d[0] * (rectWidth + rectPadding)) + xOffset;
+                    })
+                .attr("y", function(d,i) {
+                        return (d[1] * (rectHeight + rectPadding)) + yOffset;
+                    })
+                .attr("width", rectWidth)
+                .attr("height", rectHeight)
+                .attr("fill", function(d,i) {
+                        if(d[2] <= 0) {
+                            return "lightgray";
+                        }
+                        else {
+                            return "black";
+                        }
+                    });
+        </script>
     </body>
 
 </html>
