@@ -28,6 +28,27 @@ function createBoard(boardSize) {
 }
 
 /*
+ * createRandomBoard: Integer:boardSize -> Array<Array<Integer>>:board
+ * given the size of a board, this function creates a 2d array for the
+ * board that is boardSize x boardSize with all the values randomly
+ * initialized to either 0 or 1. The resulting 2D array is then returned.
+ */
+function createRandomBoard(boardSize) {
+    if(boardSize == null) {
+        boardSize = BOARD_SIZE;
+    }
+    var board = new Array(boardSize);
+    for(var i = 0; i < boardSize; i++) {
+        var currRow = new Array(boardSize);
+        for(var j = 0; j < boardSize; j++) {
+            currRow[j] = Math.floor(Math.random() * 10) % 2;
+        }
+        board[i] = currRow;
+    }
+    return board;
+}
+
+/*
  * updateBoard: Array<Array<Integer>>:board -> Array<Array<Integer>>:board
  * given a board, this function will update the board according to the
  * rules of the game of life. The rules of the game of life are as follows:
