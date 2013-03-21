@@ -69,6 +69,27 @@ function updateBoard(board) {
     return updatedBoard;
 }
 
+/*
+ * getLivenessBoard:
+ *  Array<Array<Integer>>:board -> Array<Array<Integer>>:lboard
+ * this function will go through a given board and build a new board
+ * that represents the liveness of the board. The new board will have
+ * a value at each cell that represents the number of live neighbors
+ * that the cell has.
+ */
+function getLivenessBoard(board) {
+    var lboard = [];
+    for(var i = 0; i < board.length; i++) {
+        var row = board[i],
+            lrow = [];
+        for(var j = 0; j < row.length; j++) {
+            lrow.push(countLiveNeighbors(board,i,j));
+        }
+        lboard.push(lrow);
+    }
+    return lboard;
+}
+
 // TODO: Because of the way that isLive is implemented, the function
 // countLiveNeighbors doesn't need to so explicitely check the relative
 // location of every neighbor before calling isLive, it can simply call
@@ -85,12 +106,11 @@ function updateBoard(board) {
  * return 0.
  */
 function isLive(board, x, y) {
-    if(x >= 0 && x <= board.length) {
-        var row = board[x];
-        if(y >= 0 && y <= row.length) {
-            if(row == ALIVE) {
-                return 1;
-            }
+    var row = board[x];
+    if(row != undefined) {
+        var val = row[y];
+        if(val != undefined) {
+            return val;
         }
     }
     return 0;
@@ -104,6 +124,7 @@ function isLive(board, x, y) {
  * that cell, the count will be incremented. The final count will be
  * returned.
  */
+/*
 function countLiveNeighbors(board, x, y) {
     var count = 0;
     // can I look up and down
@@ -175,6 +196,20 @@ function countLiveNeighbors(board, x, y) {
             count += isLive(board, x, y-1);
         }
     }
+    return count;
+}
+*/
+
+function countLiveNeighbors(board,x,y) {
+    var count = 0;
+    count += isLive(board, x-1, y);
+    count += isLive(board, x+1, y);
+    count += isLive(board, x-1, y-1);
+    count += isLive(board, x+1, y-1);
+    count += isLive(board, x-1, y+1);
+    count += isLive(board, x+1, y+1);
+    count += isLive(board, x, y-1);
+    count += isLive(board, x, y+1);
     return count;
 }
 
