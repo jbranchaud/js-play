@@ -7,7 +7,7 @@ var BOARD_SIZE = 100,
     XOFFSET = 20,
     YOFFSET = 20;
 
-function board(board) {
+function Board(board) {
     if(board == null) {
         this.board = createBoard(BOARD_SIZE);
     }
@@ -15,17 +15,31 @@ function board(board) {
         this.board = board;
     }
     // make sure the board is at least a rectangle
-    // validateBoard(board);
+    if(!validateBoard(this.board)) {
+        throw new Error("Invalid Board");
+    }
     this.boardHeight = board.length;
     this.boardWidth = board[0].length;
     this.svgWidth =
-        (boardWidth * (RECT_WIDTH + RECT_PADDING)) - RECT_PADDING + (XOFFSET * 2);
+        (this.boardWidth * (RECT_WIDTH + RECT_PADDING)) - RECT_PADDING + (XOFFSET * 2);
     this.svgHeight =
-        (boardHeight * (RECT_HEIGHT + RECT_PADDING)) - RECT_PADDING + (YOFFSET * 2);
+        (this.boardHeight * (RECT_HEIGHT + RECT_PADDING)) - RECT_PADDING + (YOFFSET * 2);
     this.svg = d3.select("body").append("svg")
                 .attr("width", this.svgWidth)
                 .attr("height", this.svgHeight);
+
 }
+
+// add a function to the Board prototype that will build a data array
+Board.prototype.getDataArray = function() {
+    var data = [];
+    for(var i = 0; i < this.board.length; i++) {
+        for(var j = 0; j < this.board[i].length; j++) {
+            data.push([i,j,this.board[i][j]]);
+        }
+    }
+    return data;
+};
 
 /*
  * createBoard: Integer:boardSize -> Array<Array<Integer>>:board
