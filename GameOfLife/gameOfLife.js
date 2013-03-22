@@ -70,12 +70,31 @@ function createRandomBoard(boardSize) {
 }
 
 /*
- * TODO: I need to create a method validateBoard that will take a given
- * board (that is, 2D array) and will check that it is a valid board. The
- * conditions for a valid board at this point are as follows:
+ * validateBoard: Array<Array<Integer>>:board -> boolean:valid
+ * given a 2D array of integers that represents a board, this function will
+ * check that it meets the criteria for a valid Game of Life board.
+ * The criteria for a valid board is as follows:
  * - we aren't forcing square, so width and height can differ
+ * - the width and height must both be greater than 0
  * - each row needs to be the same length
  */
+function validateBoard(board) {
+    if(board.length <= 0) {
+        return false;
+    }
+
+    var width = board[0].length;
+    if(width <= 0) {
+        return false;
+    }
+    for(var i = 1; i < board.length; i++) {
+        if(board[i].length != width) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 /*
  * updateBoard: Array<Array<Integer>>:board -> Array<Array<Integer>>:board
