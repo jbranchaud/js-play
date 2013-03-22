@@ -1,9 +1,30 @@
 var BOARD_SIZE = 100,
     DEAD = 0,
-    ALIVE = 1;
+    ALIVE = 1,
+    RECT_WIDTH = 10,
+    RECT_HEIGHT = 10,
+    RECT_PADDING = 2,
+    XOFFSET = 20,
+    YOFFSET = 20;
 
-function board() {
-    this.board = createBoard(BOARD_SIZE);
+function board(board) {
+    if(board == null) {
+        this.board = createBoard(BOARD_SIZE);
+    }
+    else {
+        this.board = board;
+    }
+    // make sure the board is at least a rectangle
+    // validateBoard(board);
+    this.boardHeight = board.length;
+    this.boardWidth = board[0].length;
+    this.svgWidth =
+        (boardWidth * (RECT_WIDTH + RECT_PADDING)) - RECT_PADDING + (XOFFSET * 2);
+    this.svgHeight =
+        (boardHeight * (RECT_HEIGHT + RECT_PADDING)) - RECT_PADDING + (YOFFSET * 2);
+    this.svg = d3.select("body").append("svg")
+                .attr("width", this.svgWidth)
+                .attr("height", this.svgHeight);
 }
 
 /*
@@ -47,6 +68,14 @@ function createRandomBoard(boardSize) {
     }
     return board;
 }
+
+/*
+ * TODO: I need to create a method validateBoard that will take a given
+ * board (that is, 2D array) and will check that it is a valid board. The
+ * conditions for a valid board at this point are as follows:
+ * - we aren't forcing square, so width and height can differ
+ * - each row needs to be the same length
+ */
 
 /*
  * updateBoard: Array<Array<Integer>>:board -> Array<Array<Integer>>:board
