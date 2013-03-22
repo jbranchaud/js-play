@@ -66,7 +66,7 @@
             function updateWorld(board,gEnters) {
                 board = updateBoard(board);
                 gEnters.selectAll("rect")
-                    .transition()
+                    //.transition()
                     .attr("fill", function(d,i) {
                         if(board[d[0]][d[1]] <= 0) {
                             return "lightgray";
