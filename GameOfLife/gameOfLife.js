@@ -103,19 +103,31 @@ Board.prototype.updateSVG = function() {
 }
 
 /*
- * createBoard: Integer:boardSize -> Array<Array<Integer>>:board
- * given the size of a board, this function creates a 2d array for
- * the board that is boardSize x boardSize with all the values
- * initialized to 0. The resulting 2D array is then returned.
+ * createBoard: Integer:boardWidth, Integer:boardHeight ->
+ *  Array<Array<Integer>>:board
+ * given the width and height of the board, this function creates a 2D array
+ * for the board that is boardWidth x boardHeight with all the values
+ * initialized to 0. If only a single Integer value is given, then this
+ * function creates a 2D array for the board that is boardWidth x boardWidth
+ * (that is, a square) with all the values initialized to 0. The resulting
+ * 2D array is then returned.
  */
-function createBoard(boardSize) {
-    if(boardSize == null) {
-        boardSize = BOARD_SIZE;
+function createBoard(boardWidth, boardHeight) {
+    // if the boardWidth isn't given, then use the default board size
+    if(boardWidth == null) {
+        boardWidth = BOARD_SIZE;
     }
-    var board = new Array(boardSize);
-    for(var i = 0; i < boardSize; i++) {
-        var currRow = new Array(boardSize);
-        for(var j = 0; j < boardSize; j++) {
+
+    // if the boardHeight isn't given, then use whatever value is stored in
+    // the boardWidth, thus making this a square board.
+    if(boardHeight == null) {
+        boardHeight = boardWidth;
+    }
+
+    var board = new Array(boardHeight);
+    for(var i = 0; i < boardHeight; i++) {
+        var currRow = new Array(boardWidth);
+        for(var j = 0; j < boardWidth; j++) {
             currRow[j] = 0;
         }
         board[i] = currRow;
