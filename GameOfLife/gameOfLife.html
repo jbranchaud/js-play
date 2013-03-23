@@ -17,71 +17,13 @@
         <h1>Game of Life</h1>
 
     <script type="text/javascript">
-            var boardSize = 50;
-            var board = createRandomBoard(boardSize);
-            var rectWidth = 10,
-                rectHeight = 10,
-                rectPadding = 2,
-                xOffset = 20,
-                yOffset = 20;
 
-            var svgWidth = (boardSize * (rectWidth + rectPadding)) -
-                    rectPadding + (xOffset * 2),
-                svgHeight = (boardSize * (rectHeight + rectPadding)) -
-                    rectPadding + (yOffset * 2),
-                svg = d3.select("body").append("svg")
-                        .attr("width", svgWidth)
-                        .attr("height", svgHeight);
-
-            var getData = function(board) {
-                var data = [];
-                for(var i = 0; i < board.length; i++) {
-                    for(var j = 0; j < board[i].length; j++) {
-                        data.push([i,j,board[i][j]]);
-                    }
-                }
-                return data;
-            };
-
-            var gEnters = svg.selectAll("g")
-                .data(getData(board))
-                .enter()
-                .append("g");
-
-            gEnters.append("rect")
-                .attr("x", function(d,i) {
-                        return (d[0] * (rectWidth + rectPadding)) + xOffset;
-                    })
-                .attr("y", function(d,i) {
-                        return (d[1] * (rectHeight + rectPadding)) + yOffset;
-                    })
-                .attr("width", rectWidth)
-                .attr("height", rectHeight)
-                .attr("fill", function(d,i) {
-                        if(d[2] <= 0) {
-                            return "lightgray";
-                        }
-                        else {
-                            return "black";
-                        }
-                });
-
-            function updateWorld(board,gEnters) {
-                board = updateBoard(board);
-                gEnters.selectAll("rect")
-                    //.transition()
-                    .attr("fill", function(d,i) {
-                        if(board[d[0]][d[1]] <= 0) {
-                            return "lightgray";
-                        }
-                        else {
-                            return "black";
-                        }
-                    });
-                setTimeout(function() { updateWorld(board,gEnters); }, 1000);
-            }
-
-            updateWorld(board, gEnters);
+            var b1 = new Board(createRandomBoard(50));
+            b1.generateSVG();
+            setInterval(function() {
+                        b1.update();
+                        b1.updateSVG();
+                    }, 1000);
 
         </script>
     </body>

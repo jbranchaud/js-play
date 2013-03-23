@@ -7,27 +7,33 @@ var BOARD_SIZE = 100,
     XOFFSET = 20,
     YOFFSET = 20;
 
+/*
+ * an object that represents a Game of Life board
+ */
 function Board(board) {
+    // check if a board was given or if one needs creating
+    this.board = board;
     if(board == null) {
         this.board = createBoard(BOARD_SIZE);
     }
-    else {
-        this.board = board;
-    }
+
     // make sure the board is at least a rectangle
     if(!validateBoard(this.board)) {
         throw new Error("Invalid Board");
     }
+
+    // initialize the Board attributes
     this.boardHeight = board.length;
     this.boardWidth = board[0].length;
+    this.rectWidth = RECT_WIDTH;
+    this.rectHeight = RECT_HEIGHT;
+    this.rectPadding = RECT_PADDING;
+    this.xOffset = XOFFSET;
+    this.yOffset = YOFFSET;
     this.svgWidth =
-        (this.boardWidth * (RECT_WIDTH + RECT_PADDING)) - RECT_PADDING + (XOFFSET * 2);
+        (this.boardWidth * (this.rectWidth + this.rectPadding)) - this.rectPadding + (this.xOffset * 2);
     this.svgHeight =
-        (this.boardHeight * (RECT_HEIGHT + RECT_PADDING)) - RECT_PADDING + (YOFFSET * 2);
-    this.svg = d3.select("body").append("svg")
-                .attr("width", this.svgWidth)
-                .attr("height", this.svgHeight);
-
+        (this.boardHeight * (this.rectHeight + this.rectPadding)) - this.rectPadding + (this.yOffset * 2);
 }
 
 // add a function to the Board prototype that will build a data array
@@ -40,6 +46,61 @@ Board.prototype.getDataArray = function() {
     }
     return data;
 };
+
+// add a function to the Board prototype that will generate the SVG
+Board.prototype.generateSVG = function() {
+    var self = this;
+    // create the correctly sized SVG element and append it to the page body
+    this.svg = d3.select("body").append("svg")
+                .attr("width", this.svgWidth)
+                .attr("height", this.svgHeight);
+
+    // append a bunch of g tags to the svg based on the data array for this
+    // board
+    this.gEnters = this.svg.selectAll("g")
+        .data(this.getDataArray())
+        .enter()
+        .append("g");
+
+    // append, position, and fill a rectangle for each g tag based on the
+    // data for that tag
+    this.gEnters.append("rect")
+        .attr("x", function(d,i) {
+            return (d[0] * (self.rectWidth + self.rectPadding)) + self.xOffset;
+        })
+        .attr("y", function(d,i) {
+            return (d[1] * (self.rectHeight + self.rectPadding)) + self.yOffset;
+        })
+        .attr("width", this.rectWidth)
+        .attr("height", this.rectHeight)
+        .attr("fill", function(d,i) {
+            if(d[2] <= 0) {
+                return "lightgray";
+            }
+            else {
+                return "black";
+            }
+        });
+}
+
+// add a function to the Board prototype that will update the board
+Board.prototype.update = function() {
+    this.board = updateBoard(this.board);
+}
+
+// add a function to the Board prototype that will update the SVG
+Board.prototype.updateSVG = function() {
+    var self = this;
+    this.gEnters.selectAll("rect")
+        .attr("fill", function(d,i) {
+            if(self.board[d[0]][d[1]] <= 0) {
+                return "lightgray";
+            }
+            else {
+                return "black";
+            }
+        });
+}
 
 /*
  * createBoard: Integer:boardSize -> Array<Array<Integer>>:board
