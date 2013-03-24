@@ -41,7 +41,7 @@ Board.prototype.getDataArray = function() {
     var data = [];
     for(var i = 0; i < this.board.length; i++) {
         for(var j = 0; j < this.board[i].length; j++) {
-            data.push([i,j,this.board[i][j]]);
+            data.push([j,i,this.board[i][j]]);
         }
     }
     return data;
