@@ -102,6 +102,22 @@ Board.prototype.updateSVG = function() {
         });
 }
 
+// add a function to Board prototype that will run the board
+Board.prototype.run = function(interval) {
+    // do the initial rendering of the board
+    this.generateSVG();
+
+    if(interval == null) {
+        interval = 1000;
+    }
+    // set the interval for the given interval value
+    var self = this;
+    setInterval(function() {
+        self.update();
+        self.updateSVG();
+    }, interval);
+}
+
 /*
  * createBoard: Integer:boardWidth, Integer:boardHeight ->
  *  Array<Array<Integer>>:board

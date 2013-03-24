@@ -16,14 +16,10 @@
     
         <h1>Game of Life</h1>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
             var b1 = new Board(createRandomBoard(50));
-            b1.generateSVG();
-            setInterval(function() {
-                        b1.update();
-                        b1.updateSVG();
-                    }, 1000);
+            b1.run(1000);
 
         </script>
     </body>
