@@ -136,19 +136,32 @@ function createBoard(boardWidth, boardHeight) {
 }
 
 /*
- * createRandomBoard: Integer:boardSize -> Array<Array<Integer>>:board
- * given the size of a board, this function creates a 2d array for the
- * board that is boardSize x boardSize with all the values randomly
- * initialized to either 0 or 1. The resulting 2D array is then returned.
+ * createRandomBoard: Integer:boardWidth, Integer:boardHeight ->
+ *  Array<Array<Integer>>:board
+ * given the width and height of a board, this function creates a 2D array
+ * for the board that is boardWidth x boardHeight with all the values
+ * randomly initialized to either 0 or 1. Given only a value for the width,
+ * this function creates a 2D array for the board that is boardWidth x
+ * boardWidth, again with all the values randomly initialized. If no values
+ * are given, then the default board size is used for the width and the
+ * height. The resulting 2D array is then returned.
  */
-function createRandomBoard(boardSize) {
-    if(boardSize == null) {
-        boardSize = BOARD_SIZE;
+function createRandomBoard(boardWidth, boardHeight) {
+    // if no width value is given, then use the default board size
+    if(boardWidth == null) {
+        boardWidth == BOARD_SIZE;
     }
-    var board = new Array(boardSize);
-    for(var i = 0; i < boardSize; i++) {
-        var currRow = new Array(boardSize);
-        for(var j = 0; j < boardSize; j++) {
+
+    // if no height value is given, then use the width
+    if(boardHeight == null) {
+        boardHeight = boardWidth;
+    }
+
+    // create a random board with size boardWidth x boardHeight
+    var board = new Array(boardHeight);
+    for(var i = 0; i < boardHeight; i++) {
+        var currRow = new Array(boardWidth);
+        for(var j = 0; j < boardWidth; j++) {
             currRow[j] = Math.floor(Math.random() * 10) % 2;
         }
         board[i] = currRow;
@@ -197,7 +210,7 @@ function validateBoard(board) {
  *   as if by reproduction
  */
 function updateBoard(board) {
-    updatedBoard = [];
+    var updatedBoard = [];
     for(var i = 0; i < board.length; i++) {
         var row = board[i],
             updatedRow = [];
@@ -299,6 +312,3 @@ function printBoard(board) {
     board.forEach(printRow);
 }
 
-var b1 = createBoard();
-var b2 = createBoard(20);
-printBoard(b2);
