@@ -93,7 +93,7 @@ Board.prototype.updateSVG = function() {
     var self = this;
     this.gEnters.selectAll("rect")
         .attr("fill", function(d,i) {
-            if(self.board[d[0]][d[1]] <= 0) {
+            if(self.board[d[1]][d[0]] <= 0) {
                 return "lightgray";
             }
             else {
