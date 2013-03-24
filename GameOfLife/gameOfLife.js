@@ -23,6 +23,7 @@ function Board(board) {
     }
 
     // initialize the Board attributes
+    this.paused = false;
     this.boardHeight = board.length;
     this.boardWidth = board[0].length;
     this.rectWidth = RECT_WIDTH;
@@ -102,17 +103,40 @@ Board.prototype.updateSVG = function() {
         });
 }
 
+// add a function to the Board prototype that will pause the board (that
+// is, set the board's paused value to true).
+Board.prototype.pause = function() {
+    this.paused = true;
+}
+
+// add a function to the Board prototype that will unpause the board (that
+// is, set the board's paused value to false).
+Board.prototype.unpause = function() {
+    this.paused = false;
+}
+
 // add a function to Board prototype that will run the board
-Board.prototype.run = function(interval) {
+Board.prototype.run = function(interval, paused) {
     // do the initial rendering of the board
     this.generateSVG();
 
+    // if interval is not specified, then initialize it to a default value
+    // of 1000
     if(interval == null) {
         interval = 1000;
     }
+
+    // if paused is not specified, then assume false
+    if(paused == null) {
+        this.unpause();
+    }
+
     // set the interval for the given interval value
     var self = this;
     setInterval(function() {
+        if(self.paused) {
+            return;
+        }
         self.update();
         self.updateSVG();
     }, interval);
