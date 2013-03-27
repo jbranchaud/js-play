@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple MathJax</title>
+
+        <!-- scripts -->
+        <!--
+        <script type="text/javascript"
+            src="../js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML.js"></script>
+        -->
+        <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+        <!-- styles -->
+        <link rel="stylesheet" src="../css/normalize.css" />
+    </head>
+
+    <body>
+    
+        <h1>Simpe MathJax</h1>
+
+        <p>
+        $$
+        \def\inch#1{#1''}
+        \def\ft#1{#1'\thinspace}
+        \text{result} = a + b^2 - t_i / 2 = \inch2 - 2.25 - .125 / 2
+            = \inch4$$
+        </p>
+
+    </body>
+
+</html>
