@@ -6,4 +6,173 @@ syntax provided by [John Gruber
 
 ## Markdown Elements
 
+### Paragraphs and Line Breaks
+
+Any lines of consecutive text are grouped into a single paragraph
+element. One or more empty lines after a line of text indicates a
+break in the paragraph, resulting in a new paragraph.
+
+Line breaks (\<br /\>) in Markdown must be declared explicitely by ending a
+line in two or more spaces.
+
+### Headers
+
+You can make H1 using ===
+
+    This is an H1
+    =============
+
+You can make H2 using ---
+
+    This is an H2
+    -------------
+
+Additionally, headers can be achieved using hashes (#) in front of the
+line that is the header. The number of hashes indicates the level of the
+heading.
+
+    # This is an H1
+    ## This is an H2
+    ### This is an H3
+    #### This is an H4
+    ##### This is an H5
+    ###### This is an H6
+
+You can optionally close this heading syntax like so:
+
+    ## This is an H2 ##
+
+### Blockquotes
+
+Blockquotes in Markdown are similar to email because they use `>`. You can
+either start each new line in the blockquote with a `>` (which is the
+preferred style) or you can lazily just mark the first line of a paragraph
+as a blockquote and the rest of the paragraph will follow suit.
+
+    > This is a blockquote
+    > that I am writing rigth now.
+
+    > This is a blockquote
+    only marked by the first line.
+
+You can also nest things within blockquotes (such as more blockquotes and
+lists).
+
+    > This is a blockquote
+    >
+    > > Here is a quote from someone else....
+    >
+    > This is the end of a blockquote
+
+    > This is a blockquote
+    >
+    > 1. List item 1
+    > 2. List item 2
+    >
+    > End of blockquote
+
+### Lists
+
+Lists can be unordered or ordered.
+
+There are three ways to create an unordered list, which are all equivalent:
+
+    * First
+    * Second
+    * Third
+
+    - First
+    - Second
+    - Third
+
+    + First
+    + Second
+    + Third  
+
+Ordered lists are created by using digits with periods (though the digits
+used do not matter). The following create equivalent ordered lists:
+
+    1. First
+    2. Second
+    3. Third
+
+    1. First
+    1. Second
+    1. Third
+
+    99. First
+    52. Second
+    75. Third
+
+If the list items are separated by an empty line, then it will wrap the list
+item content in paragraph tags:
+
+    * Paragraph List Item 1
+
+    * Paragraph List Item 2
+
+Which produces:
+
+    <ul>
+        <li><p>Paragraph List Item 1</p></li>
+        <li><p>Paragraph List Item 2</p></li>
+    </ul>
+
+List items can contain multiple paragraphs and you can also nest all kinds
+of other blocks in list items including lists themselves:
+
+    - Item 1
+    - Item 2
+        - Sub Item 1
+        - Sub Item 2
+    - Item 3
+
+### Code Blocks
+
+By indenting the content by 4 spaces or 1 tab, we can create a code block.
+
+    This is a code block
+
+### Horizontal Rules
+
+You can create a horizontal rule (\<hr /\>) with any of the following:
+
+    * * *
+
+    ***
+
+    *****
+    
+    - - -
+
+    ----------------------------
+
+### Links
+
+There are two ways to incorporate links into your document.
+
+### Emphasis
+
+You can make spans of text italic or bold to add emphasis.
+
+### Code
+
+Using backticks (\`) will create an inline code span for the included text.
+
+### Images
+
+Similarly to links, images can be included in your document
+
+### Automatic Links
+
+This is a shortcut for injecting links automatically into your document.
+
+### Backslash Escapes
+
+Backslash can be used to escape any of Markdown's special characters.
+
+## BNF
+
+The following is an attempt at the BNF for Markdown's grammar:
+
 
