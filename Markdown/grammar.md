@@ -4,6 +4,11 @@ The markdown grammar that I will use will be my transcription of the
 syntax provided by [John Gruber
 (DaringFireball)](http://daringfireball.net/projects/markdown/syntax).
 
+There is a Markdown parser written in C that has a nice implementation
+of the
+[grammar](https://github.com/jgm/peg-markdown/blob/master/markdown_parser.leg)
+written in [leg](http://piumarta.com/software/peg/).
+
 ## Markdown Elements
 
 ### Paragraphs and Line Breaks
