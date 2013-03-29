@@ -9,6 +9,12 @@ of the
 [grammar](https://github.com/jgm/peg-markdown/blob/master/markdown_parser.leg)
 written in [leg](http://piumarta.com/software/peg/).
 
+This [code
+block](https://github.com/vmg/sundown/blob/master/src/markdown.c#L713-L740)
+from [Sundown](https://github.com/vmg/sundown) shows a rather simple and
+elegant approach to being UTF-8 aware (that is, supporting the occurrence
+of `&#xxxx;` in the given markdown document.
+
 ## Markdown Elements
 
 ### Paragraphs and Line Breaks
