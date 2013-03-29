@@ -171,8 +171,46 @@ This is a shortcut for injecting links automatically into your document.
 
 Backslash can be used to escape any of Markdown's special characters.
 
-## BNF
+## EBNF
 
-The following is an attempt at the BNF for Markdown's grammar:
+The following is an attempt at the EBNF for Markdown's grammar:
 
-
+    Document = Blocks | eof;
+    Blocks = Block ( Emptys Blocks | eof );
+    Emptys = empty { empty };
+    Block = Paragraph | Header | Blockquote | List | Codeblock | HorizontalLine;
+    Paragraph = 
+    Header = 
+    Blockquote = 
+    List = 
+    Codeblock = 
+    HorizontalLine = 
+    Link = 
+    Code = 
+    Image = 
+    AutoLink = "<" ( URL | EMAIL ) ">";
+    Emphasize = Bold | Italic
+    Bold = Asterik Asterik String Asterik Asterik |
+            Underscore Underscore String Underscore Underscore;
+    Italic = Asterik String Asterik |
+                Underscore String Underscore;
+    VisibleCharacter = Alphabet | Digit | Escaped | 
+    Escaped = Backslash Special;
+    Alphabet = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" |
+                "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" |
+                "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" |
+                "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" |
+                "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" |
+                "y" | "z";
+    Number = NonZeroDigit { Digit };
+    NonZeroDigit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+    Digit = "0" | NonZeroDigit;
+    Whitespace = "\s" | "\t" | "\n" | "\r";
+    Asterik = "*";
+    Backslash = "\";
+    Backtick = "`";
+    Others = "@" | "$" | "%" | "^" | "&" | "?" | "'" | "," | ";" | ":";
+    Special = "\" | "`" | "*" | "_" | "{" | "}" | "[" | "]" | "(" | ")" |
+                "#" | "+" | "-" | "." | "!";
+    // empty is an empty line, no characters on that line
+    // eof is the end of the file, no more bits to read
