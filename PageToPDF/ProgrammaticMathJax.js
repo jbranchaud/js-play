@@ -4,6 +4,10 @@
  *
  * Source Code below from:
  * http://www.onemathematicalcat.org/MathJaxDocumentation/TeXSyntax.htm
+ *
+ * Furthermore, you can define TeX macros for the web page by modifying the
+ * MathJax config as described here:
+ * http://docs.mathjax.org/en/v1.1-latest/options/TeX.html
  */
 
 function processCodeDisplay() {
