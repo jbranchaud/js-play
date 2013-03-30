@@ -143,6 +143,23 @@ Board.prototype.run = function(interval, paused) {
 }
 
 /*
+ * pauseToggle: Board:board -> boolean:toggled
+ * given a Board object, this function will attempt to toggle the paused
+ * value of this board using either the pause() or unpause() functions.
+ */
+function pauseToggle(board) {
+    // if the board is paused, then unpause
+    if(board.paused) {
+        board.unpause();
+    }
+    // otherwise, pause the board
+    else {
+        board.pause();
+    }
+    return true;
+}
+
+/*
  * createBoard: Integer:boardWidth, Integer:boardHeight ->
  *  Array<Array<Integer>>:board
  * given the width and height of the board, this function creates a 2D array
