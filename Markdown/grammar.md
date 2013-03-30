@@ -190,8 +190,14 @@ The following is an attempt at the EBNF for Markdown's grammar:
     Blocks = Block ( Emptys Blocks | eof );
     Emptys = empty { empty };
     Block = Paragraph | Header | Blockquote | List | Codeblock | HorizontalLine;
-    Paragraph = 
-    Header = 
+    Paragraph = String { String };
+    Header = "#" H1 [ "#" ];
+    H1 = "#" H2 [ "#" ] | Paragraph;
+    H2 = "#" H3 [ "#" ] | Paragraph;
+    H3 = "#" H4 [ "#" ] | Paragraph;
+    H4 = "#" H5 [ "#" ] | Paragraph;
+    H5 = "#" H6 [ "#" ] | Paragraph;
+    H6 = Paragraph;
     Blockquote = 
     List = 
     Codeblock = 
@@ -205,8 +211,12 @@ The following is an attempt at the EBNF for Markdown's grammar:
             Underscore Underscore String Underscore Underscore;
     Italic = Asterik String Asterik |
                 Underscore String Underscore;
-    VisibleCharacter = Alphabet | Digit | Escaped | 
+    String = VisibleCharacter { VisibleCharacter } Newline;
+    VisibleCharacter = Unicode | Others | Alphanum | Escaped |
+    InlineWhitespace;
     Escaped = Backslash Special;
+    Unicode = "&" Alphanum Alphanum Alphanum Alphanum ";";
+    Alphanum = ( Alphabet | Digit );
     Alphabet = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" |
                 "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" |
                 "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" |
@@ -216,11 +226,17 @@ The following is an attempt at the EBNF for Markdown's grammar:
     Number = NonZeroDigit { Digit };
     NonZeroDigit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
     Digit = "0" | NonZeroDigit;
+    Newline = "\n";
+    InlineWhitespace = Tab | Space;
+    Tab = "\t";
+    Space = "\s";
     Whitespace = "\s" | "\t" | "\n" | "\r";
     Asterik = "*";
     Backslash = "\";
     Backtick = "`";
     Others = "@" | "$" | "%" | "^" | "&" | "?" | "'" | "," | ";" | ":";
+    // the Special characters only need to be escaped in certain situations,
+    // need to figure out how to describe this in the grammar.
     Special = "\" | "`" | "*" | "_" | "{" | "}" | "[" | "]" | "(" | ")" |
                 "#" | "+" | "-" | "." | "!";
     // empty is an empty line, no characters on that line
