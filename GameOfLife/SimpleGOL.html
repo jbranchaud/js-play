@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple Game of Life</title>
+
+        <!-- scripts -->
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+        <script type="text/javascript" src="gameOfLife.js"></script>
+
+        <!-- styles -->
+    </head>
+
+    <body>
+    
+        <h1>Simple Game of Life</h1>
+
+        <script type="text/javascript">
+
+            var b1 = new Board(createRandomBoard(50));
+            b1.run(1000);
+
+        </script>
+    </body>
+
+</html>
