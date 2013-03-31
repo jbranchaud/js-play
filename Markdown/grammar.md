@@ -241,3 +241,32 @@ The following is an attempt at the EBNF for Markdown's grammar:
                 "#" | "+" | "-" | "." | "!";
     // empty is an empty line, no characters on that line
     // eof is the end of the file, no more bits to read
+
+## Paragraph Grammar (EBNF)
+
+I am going to first try implementing a subset of the above grammar,
+specifically Markdown documents that are only made up of paragraphs.
+
+Document = { Block } eof;
+Block = Paragraph;
+Paragraph = Line { Line };
+Line = { VisibleCharacter | Spacing } Newline;
+Newline = "\n";
+Spacing = "\s" | "\t";
+VisibleCharacter = Unicode | Escaped | Special | Others | Alphanum;
+Escaped = Backslash Special;
+Unicode = "&" Alphanum Alphanum Alphanum Alphanum ";";
+Alphanum = ( Alphabet | Digit );
+Alphabet = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" |
+            "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" |
+            "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" |
+            "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" |
+            "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" |
+            "y" | "z";
+NonZeroDigit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+Digit = "0" | NonZeroDigit;
+Others = "@" | "$" | "%" | "^" | "&" | "?" | "'" | "," | ";" | ":";
+Special = "\" | "`" | "*" | "_" | "{" | "}" | "[" | "]" | "(" | ")" |
+            "#" | "+" | "-" | "." | "!";
+
+
