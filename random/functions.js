@@ -2,6 +2,9 @@
  * functions.js
  * 
  * I am going to experiment a little with functions in this file.
+ *
+ * Great article from MDN that goes into depth about this:
+ * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope#Function_constructor_vs._function_declaration_vs._function_expression
  */
 
 // normal function construction
