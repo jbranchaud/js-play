@@ -34,3 +34,38 @@ var abs = function absolute(a) {
 
     return (a * -1);
 };
+
+// wrap the function in a closure
+var firstModule = ( function() {
+    
+    var values = [1,2,3,4,5];
+
+    function privateFunction() {
+        for(var i = 0; i < values.length; i++) {
+            console.log(values[i]);
+        }
+    }
+
+    return {
+        publicFunction: function() {
+            privateFunction();
+        }
+    };
+})();
+
+var myValues = [1,2,3,4,5];
+
+var secondModule = ( function(values) {
+    
+    function privateFunction() {
+        for(var i = 0; i < values.length; i++) {
+            console.log(values[i]);
+        }
+    }
+
+    return {
+        publicFunction: function() {
+            privateFunction();
+        }
+    }
+})(myValues);
