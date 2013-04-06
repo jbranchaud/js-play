@@ -63,9 +63,18 @@ var secondModule = ( function(values) {
         }
     }
 
+    function updateValue(index, value) {
+        if(index < values.length) {
+            values[index] = value;
+        }
+    }
+
     return {
         publicFunction: function() {
             privateFunction();
+        },
+        updateValue: function(index,value) {
+            updateValue(index,value);
         }
     }
 })(myValues);
