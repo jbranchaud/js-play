@@ -20,13 +20,23 @@
      * expression is false, then the function will throw an error for an
      * assertion violation.
      */
-    Assert.prototype.assertTrue = function( expression ) {
-
-       if( expression != true) {
-            throw new Error("Assert.assertTrue: assertion violated");
-       }
-
-       return;
+    Assert.prototype.assertTrue = function( expression, msg ) {
+   
+        var message = msg;
+        if( message == null || typeof message === 'undefined' ) {
+            message = "";
+        }
+        
+        // check the expression and throw an error if it is false
+        if( expression != true) {
+            var errorMessage = "Assert.assertTrue: assertion violated";
+            if(message != "") {
+                errorMessage = errorMessage + " - " + message;
+            }
+            throw new Error(errorMessage);
+        }
+        
+        return;
     };
 
     global['Assert'] = new Assert();
