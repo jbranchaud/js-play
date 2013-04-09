@@ -66,6 +66,12 @@
         return;
     };
 
+    /*
+     * Other Functions to Support:
+     * - AssertEqual(item1,item2,message)
+     * - AssertUnequal(item1,item2,message)
+     */
+
     global['Assert'] = new Assert();
 
 })( this );
