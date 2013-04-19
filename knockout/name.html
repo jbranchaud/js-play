@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Name - Knockout</title>
+
+        <!-- Scripts -->
+        <script type="text/javascript" src="../js/knockout-2.2.1.js"></script>
+
+        <!-- Styles -->
+
+
+    </head>
+
+    <body>
+
+        <div>
+
+            <p>First Name: <input data-bind="value: firstName"></input></p>
+            <p>Last Name: <input data-bind="value: lastName"></input></p>
+            </br>
+            <p>Last Name: <input data-bind="value: fullName"></input></p>
+            </br>
+            <p>This is a document that contains a person's fullname. The
+            fullname is <span data-bind="text: fullName"></span> because the
+            first name is <span data-bind="text: firstName"></span> and the
+            last name is <span data-bind="text: lastName"></span>.</p>
+
+        </div>
+
+        <script type="text/javascript">
+            function AppViewModel() {
+                this.firstName = ko.observable("");
+                this.lastName = ko.observable("");
+                this.fullName = ko.computed(function() {
+                            return this.firstName() + " " + this.lastName();
+                        }, this);
+            }
+
+            ko.applyBindings(new AppViewModel());
+        </script>
+
+    </body>
+
+</html>
