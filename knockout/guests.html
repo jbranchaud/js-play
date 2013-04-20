@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Guests.html</title>
+
+        <!-- Scripts -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="../js/knockout-2.2.1.js"></script>
+        <script type="text/javascript">
+            
+        </script>
+
+        <!-- Styles -->
+        <style type="text/css">
+            label {
+                display: block;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <script type="text/javascript">
+            (function() {
+
+                // add a header to the body
+                $( '<h1></h1>' ).html('Guests Page').appendTo('body');
+
+                // add some input boxes to the body
+                for(var i = 0; i < 5; i++) {
+                var j = i+1
+                var thisInput = $( '<input></input', {
+                        'class': 'guestInput',
+                        'type': 'text',
+                        'data-bind': 'value: guestName'+j
+                        });
+                $( '<label></label>', {
+                    'class': 'guestLabel'
+                    }).html('Guest ' + j)
+                .append( thisInput )
+                .appendTo('body');
+
+                    $( '<p></p>' )
+                    .html('The name of guest ' + j + ' is <span data-bind="text: guestName' + j + '"></span>')
+                    .appendTo('body');
+                }
+
+                function AppViewModel() {
+                    this.guestName1 = ko.observable('');
+                    this.guestName2 = ko.observable('');
+                    this.guestName3 = ko.observable('');
+                    this.guestName4 = ko.observable('');
+                    this.guestName5 = ko.observable('');
+                }
+
+                ko.applyBindings(new AppViewModel());
+             })();
+        </script>
+    </body>
+
+</html>
