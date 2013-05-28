@@ -58,3 +58,13 @@ Stack.prototype.pop = function() {
 Stack.prototype.top = function() {
     return this.head;
 }
+
+/*
+ * empty: none -> boolean
+ *
+ * if the stack is empty, then true is returned, otherwise false is
+ * returned.
+ */
+Stack.prototype.empty = function() {
+    return this.size == 0;
+}

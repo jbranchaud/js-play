@@ -97,5 +97,27 @@
                 assert.equal(stack.top(), null);
             });
         });
+
+        describe('#Empty()', function() {
+            it('should return true when there are no items in the stack', function() {
+                var stack = new Stack();
+                assert.equal(stack.empty(), true);
+                stack.push(2);
+                stack.pop();
+                assert.equal(stack.empty(), true);
+            });
+
+            it('should return false when there are no items in the stack', function() {
+                var stack = new Stack();
+                stack.push(2);
+                assert.equal(stack.empty(), false);
+                stack.push(4);
+                assert.equal(stack.empty(), false);
+                stack.top();
+                assert.equal(stack.empty(), false);
+                stack.pop();
+                assert.equal(stack.empty(). false);
+            });
+        });
     });
 })();
