@@ -2,7 +2,7 @@
 'use strict';
 (function () {
     describe('Stack', function () {
-        describe('#Push()', function () {
+        describe('#Stack()', function() {
             it('should initialize the stack with the default values', function() {
                 var stack = new Stack();
                 // check that the head is null
@@ -12,7 +12,9 @@
                 // check that the size is 0
                 assert.equal(stack.size, 0);
             });
+        });
 
+        describe('#Push()', function () {
             it('should push the given item onto the array of items', function () {
                 var stack = new Stack();
                 assert.lengthOf(stack.items,0);
