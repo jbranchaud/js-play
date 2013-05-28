@@ -82,5 +82,20 @@
                 assert.equal(stack.head,null);
             });
         });
+
+        describe('#Top()', function() {
+            it('should return the top item from the stack if there are items in the stack', function() {
+                var stack = new Stack();
+                var i = 22;
+                stack.push(i);
+                assert.equal(stack.top(),i);
+                assert.equal(stack.head,i);
+            });
+
+            it('should return null if the stack is empty', function() {
+                var stack = new Stack();
+                assert.equal(stack.top(), null);
+            });
+        });
     });
 })();

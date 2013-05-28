@@ -48,3 +48,13 @@ Stack.prototype.pop = function() {
     }
     return poppedItem;
 }
+
+/*
+ * top: none -> Object
+ *
+ * returns the top item on the stack, but unlike the pop function, it does
+ * not modify the stack in any way.
+ */
+Stack.prototype.top = function() {
+    return this.head;
+}
