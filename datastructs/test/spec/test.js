@@ -50,6 +50,15 @@
                 assert.equal(stack.head, 24);
             });
 
+            it('should have coordination between all the state variables of the stack', function() {
+                var stack = new Stack();
+                assert.lengthOf(stack.items,stack.size);
+                // push an item onto the stack
+                stack.push(11);
+                assert.lengthOf(stack.items,stack.size);
+                assert.equal(stack.items[stack.size-1],stack.head);
+            });
+
         });
     });
 })();
