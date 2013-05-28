@@ -33,3 +33,18 @@ Stack.prototype.push = function(item) {
     this.head = item;
     this.items.push(item);
 };
+
+/*
+ * pop: none -> Object
+ *
+ * removes the top item from the stack and returns it. This ends up updating
+ * the stack, the size of the stack, and what is pointed to by the head.
+ */
+Stack.prototype.pop = function() {
+    var poppedItem = this.items.pop();
+    if(poppedItem !== undefined) {
+        this.size -= 1;
+        this.head = this.items[this.size-1];
+    }
+    return poppedItem;
+}

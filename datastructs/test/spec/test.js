@@ -60,5 +60,27 @@
             });
 
         });
+
+        describe('#Pop()', function () {
+            it('should pop the head item from the stack', function() {
+                var stack = new Stack();
+                var i = 1;
+                stack.push(i);
+                assert.equal(stack.head,i);
+                assert.equal(stack.pop(),i);
+                assert.lengthOf(stack.items,0);
+                assert.lengthOf(stack.items,stack.size);
+                assert.equal(stack.head,null);
+            });
+
+            it('should not pop anything when the stack is already empty', function() {
+                var stack = new Stack();
+                assert.lengthOf(stack.items,0);
+                assert.equal(stack.pop(), undefined);
+                assert.lengthOf(stack.items,0);
+                assert.lengthOf(stack.items,stack.size);
+                assert.equal(stack.head,null);
+            });
+        });
     });
 })();
