@@ -72,5 +72,26 @@
                 assert(anotherItem.next === newItem, "anotherItem points to newItem");
             });
         });
+
+        describe('#AddItem()', function() {
+            it('should add an item as a new ListItem to the end of the current item which is point to nothing', function() {
+                var someItem = new ListItem(2);
+                var i = 1;
+                someItem.addItem(i);
+                // check that someItem now points to an item with value i
+                assert.equal(someItem.next.item, i);
+            });
+            it('should add an item as a new ListItem in between the current item and its next', function() {
+                var someItem = new ListItem(44),
+                    anotherItem = new ListItem(55);
+                var i = 31;
+                someItem.add(anotherItem);
+                someItem.addItem(i);
+                // check that someItem now points to an item with value i
+                assert.equal(someItem.next.item, i);
+                // check that the new item now points to another item
+                assert(someItem.next.next === anotherItem, "someItem's next points to anotherItem");
+            });
+        });
     });
 })();
