@@ -49,5 +49,28 @@
                 assert.equal(listItem.next, null);
             });
         });
+        
+        describe('#Add()', function() {
+            it('should add a ListItem to the end of the current item which is pointing to nothing', function() {
+                var someItem = new ListItem(2),
+                    newItem = new ListItem(3);
+                someItem.add(newItem);
+                // check that someItem now points to newItem
+                assert(someItem.next === newItem, "someItem points to newItem");
+            });
+            it('should add a ListItem in between the current item and its next', function() {
+                var someItem = new ListItem(2),
+                    newItem = new ListItem(3),
+                    anotherItem = new ListItem(4);
+                someItem.add(newItem);
+                // check that someItem now points to newItem
+                assert(someItem.next === newItem, "someItem points to newItem");
+                // add an item between them (to someItem)
+                someItem.add(anotherItem);
+                // check that anotherItem is in between someItem and newItem
+                assert(someItem.next === anotherItem, "someItem points to anotherItem");
+                assert(anotherItem.next === newItem, "anotherItem points to newItem");
+            });
+        });
     });
 })();
