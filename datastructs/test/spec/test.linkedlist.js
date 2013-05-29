@@ -12,6 +12,31 @@
                 assert.equal(list.size, 0);
             });
         });
+
+        describe('#Add()', function() {
+            it('should add the first item to an empty linked list', function() {
+                var list = new LinkedList();
+                var i = 12;
+                list.add(i);
+                // check that first and last point to a ListItem with i
+                assert.equal(list.first.item, i);
+                assert.equal(list.last.item, i);
+                // check that the size of the list is now 1
+                assert.equal(list.size, 1);
+            });
+            it('should add the item to a partially populated linked list', function() {
+                var list = new LinkedList();
+                var i = 13, j = 45;
+                list.add(i);
+                list.add(j);
+                // check that the first contains i
+                assert.equal(list.first.item, i);
+                // check that the last contains j
+                assert.equal(list.last.item, j);
+                // check that the size of the list is now 2
+                assert.equal(list.size, 2);
+            });
+        });
     });
     describe('ListItem (LinkedList)', function() {
         describe('#ListItem()', function() {
