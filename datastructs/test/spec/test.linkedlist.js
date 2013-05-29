@@ -37,6 +37,67 @@
                 assert.equal(list.size, 2);
             });
         });
+
+        describe('#Insert()', function() {
+            it('should insert the item at index 0 (the beginning of the list)', function() {
+                var list = new LinkedList();
+                var i = 13, j = 15, k = 17, l = 19, m = 21;
+                list.add(i);
+                list.add(j);
+                list.add(k);
+                list.add(l);
+                // check that the first item is i
+                assert.equal(list.first.item, i);
+                // check that the size is 4
+                assert.equal(list.size, 4);
+                // insert an item at the beginning (0)
+                list.insert(m, 0);
+                // check that the first item is m
+                assert.equal(list.first.item, m);
+                // check that the size is 5
+                assert.equal(list.size, 5);
+            });
+            it('should insert the item at the end because of too large index', function() {
+                var list = new LinkedList();
+                var i = 11, j = 12;
+                // insert into an empty list
+                list.insert(i, 5);
+                // check that the first and last are i
+                assert.equal(list.first.item, i);
+                assert.equal(list.last.item, i);
+                // check that the size is now 1
+                assert.equal(list.size, 1);
+                // insert into a non empty list beyond size
+                list.insert(j, 5);
+                // check that the last is j and the first i
+                assert.equal(list.first.item, i);
+                assert.equal(list.last.item, j);
+                // check that the size is now 2
+                assert.equal(list.size, 2);
+            });
+            it('should insert the item at the given index which falls in between some existing items', function() {
+                var list = new LinkedList();
+                var i = 13, j = 15, k = 17, l = 19, m = 12;
+                list.add(i);
+                list.add(j);
+                list.add(k);
+                list.add(l);
+                // insert m at the 2nd position
+                list.insert(m, 2);
+                // check that the list now goes i, j, m, k, l
+                var curr = list.first;
+                assert.equal(curr.item, i);
+                curr = curr.next;
+                assert.equal(curr.item, j);
+                curr = curr.next;
+                assert.equal(curr.item, m);
+                curr = curr.next;
+                assert.equal(curr.item, k);
+                curr = curr.next;
+                assert.equal(curr.item, l);
+                assert.equal(list.size, 5);
+            });
+        });
     });
     describe('ListItem (LinkedList)', function() {
         describe('#ListItem()', function() {

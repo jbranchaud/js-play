@@ -66,7 +66,7 @@ function LinkedList() {
 }
 
 /*
- * LinkedList.add
+ * LinkedList.add: item -> void
  *
  * this is a prototype function for LinkedList that adds an item to the end
  * of the list. If this.last is null, then this.first must also be null, so
@@ -84,5 +84,36 @@ LinkedList.prototype.add = function(item) {
         this.last.add(newListItem);
         this.last = newListItem;
     }
+    this.size += 1;
+}
+
+/*
+ * LinkedList.insert: item, index -> void
+ *
+ * this is a prototype function for LinkedList that adds an item at the
+ * specified position (index) of the linked list. If the index is greater
+ * than the size of the list, then it is added to the end of the list.
+ */
+LinkedList.prototype.insert = function(item, index) {
+    var newListItem = new ListItem(item);
+    // if the index is 0
+    if(index == 0) {
+        newListItem.next = this.first;
+        this.first = newListItem;
+    }
+    // if the index is greater than or equal to size
+    else if(index >= this.size) {
+        this.add(item);
+        return;
+    }
+    // everything else, deal with normally
+    else {
+        var injectionNode = this.first;
+        for(var i = 0; i < index-1; i++) {
+            injectionNode = injectionNode.next;
+        }
+        injectionNode.add(newListItem);
+    }
+    // increment the size of the list
     this.size += 1;
 }
