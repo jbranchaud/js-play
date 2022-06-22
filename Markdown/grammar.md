@@ -247,6 +247,7 @@ The following is an attempt at the EBNF for Markdown's grammar:
 I am going to first try implementing a subset of the above grammar,
 specifically Markdown documents that are only made up of paragraphs.
 
+```
 Document = { Block } eof;
 Block = Paragraph;
 Paragraph = Line { Line };
@@ -268,5 +269,4 @@ Digit = "0" | NonZeroDigit;
 Others = "@" | "$" | "%" | "^" | "&" | "?" | "'" | "," | ";" | ":";
 Special = "\" | "`" | "*" | "_" | "{" | "}" | "[" | "]" | "(" | ")" |
             "#" | "+" | "-" | "." | "!";
-
-
+```
